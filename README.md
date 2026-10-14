@@ -1,56 +1,68 @@
-# EpochTrek | Journey Through Time
+# EpochTrek — Journey Through Time
 
-**Rediscover the past. Explore the present. Understand how places evolve.**
+### Rediscover the Past. Explore the Present.
 
-EpochTrek is an AI-powered web application that explores the transformation of places over time through historical photographs. By combining Google's Gemini AI with Wikimedia Commons, it estimates the location of an uploaded photograph, searches for a comparison image, and generates an AI-assisted summary of visible changes.
+EpochTrek is an AI-powered web application that explores how places change over time through historical photographs. Using Google's Gemini AI and Wikimedia Commons, it estimates the location of an uploaded image, searches for a relevant comparison photograph, and generates an AI-assisted summary of visible changes.
 
-> **Project:** AI-powered historical image exploration  
-> **Interface:** Streamlit  
-> **Language:** Python
+<p align="center">
+  <a href="https://epochtrek.streamlit.app/">
+    <strong>Launch EpochTrek →</strong>
+  </a>
+  &nbsp; | &nbsp;
+  <a href="https://github.com/breddyraghav/EpochTrek">
+    View Source Code
+  </a>
+</p>
 
 ---
 
 ## Overview
 
-How has a landmark changed over the decades? What did a familiar place look like in the past?
+Places evolve. Buildings are reconstructed, streets transform, and landmarks change with time. Historical photographs preserve moments from the past, but understanding how those places look today can be difficult.
 
-EpochTrek aims to make these questions easier to explore. Users upload a historical photograph, and the application uses AI-assisted image analysis and image search to help connect the photograph with a potential modern-day counterpart.
+**EpochTrek bridges that gap** by combining AI-assisted image analysis with image search to create a visual Then & Now experience.
 
-The result is a visual Then & Now experience designed for historical exploration, learning, and experimentation.
+Upload a historical photograph, explore its estimated location, compare it with a potentially relevant image, and examine an AI-generated summary of visible differences.
 
-## Features
+## Key Features
 
-- **Historical Image Upload** — Upload photographs of recognizable landmarks, buildings, streets, and places.
-- **AI-Powered Location Estimation** — Uses Google's Gemini model to estimate the likely location shown in an image.
-- **Historical Image Comparison** — Searches Wikimedia Commons for a potentially relevant comparison image.
-- **Then & Now Experience** — View the uploaded photograph alongside the retrieved image.
-- **Visual Change Summary** — Generate an AI-assisted description of visible differences between the images.
-- **Web-Based Interface** — Interact with the application through a Streamlit interface.
-- **Cloud Deployment** — Host the application using Streamlit Community Cloud.
+- **Historical Photo Upload** — Upload a photograph of a recognizable landmark, building, street, or place.
+- **AI-Powered Location Estimation** — Uses Google's Gemini model to estimate the likely location shown in the photograph.
+- **Image Discovery** — Searches Wikimedia Commons for a suitable comparison image.
+- **Then & Now Comparison** — View the uploaded historical photograph alongside the retrieved image.
+- **AI-Assisted Change Summary** — Generate a description of visible differences between the two photographs.
+- **Interactive Web Application** — Access the project through a Streamlit-powered interface.
+- **Cloud Accessibility** — Explore the deployed application directly from your browser.
+
+## Live Demo
+
+**Try EpochTrek:** https://epochtrek.streamlit.app/
+
+No local installation is required to access the hosted application. Availability and functionality depend on the deployment and external API services.
 
 ## How It Works
 
-The application follows a simple image-analysis workflow:
+The application follows a five-step workflow:
 
-1. **Upload:** Provide a historical photograph.
-2. **Analyze:** Gemini examines the image and estimates its likely location.
-3. **Search:** The application searches Wikimedia Commons for a suitable comparison image.
-4. **Compare:** Review the historical photograph and the retrieved image.
-5. **Explore:** Read the AI-assisted summary of visible changes.
+1. **Upload** — Provide a historical photograph.
+2. **Analyze** — Gemini examines the image and estimates its likely location.
+3. **Discover** — The application searches Wikimedia Commons for a potential comparison image.
+4. **Compare** — Review the historical photograph and the retrieved image.
+5. **Understand** — Explore the AI-assisted summary of visible changes.
 
 ## Technology Stack
 
-| Technology | Role |
+| Technology | Purpose |
 |---|---|
 | Python | Core application logic |
-| Streamlit | Web interface and application framework |
-| Google Gemini API | Image interpretation and AI-assisted analysis |
+| Streamlit | Web interface and application deployment |
+| Google Gemini API | AI-assisted image interpretation and analysis |
 | Wikimedia Commons API | Search for comparison images |
-| Requests | HTTP communication with external APIs |
+| Requests | HTTP communication with external services |
 
 ## Getting Started
 
-Follow these instructions to run EpochTrek on your local machine.
+Run EpochTrek locally by following the steps below.
 
 ### Prerequisites
 
@@ -58,7 +70,7 @@ Follow these instructions to run EpochTrek on your local machine.
 - Git
 - A Google Gemini API key
 
-Obtain your API key from [Google AI Studio](https://aistudio.google.com/apikey).
+Get your API key from [Google AI Studio](https://aistudio.google.com/apikey).
 
 ### 1. Clone the repository
 
@@ -67,7 +79,7 @@ git clone https://github.com/breddyraghav/EpochTrek.git
 cd EpochTrek
 ```
 
-### 2. Set up the environment
+### 2. Create a virtual environment
 
 **Windows — PowerShell**
 
@@ -86,7 +98,7 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 3. Configure your API key
+### 3. Configure the Gemini API key
 
 Create a file named `secrets.toml` inside the `.streamlit` directory.
 
@@ -96,17 +108,17 @@ Add the following configuration:
 GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
 ```
 
-Replace `YOUR_GEMINI_API_KEY` with your actual API key.
+Replace the placeholder with your actual API key.
 
-Your local configuration should be stored at:
+The local configuration path should be:
 
 ```text
 .streamlit/secrets.toml
 ```
 
-**Security note:** Never commit your real API key to GitHub. Keep `secrets.toml` private and use the platform's Secrets configuration when deploying the application.
+**Security:** Never commit your actual API key to GitHub. Keep the local secrets file private and configure secrets separately when deploying the application.
 
-### 4. Launch the application
+### 4. Run the application
 
 **Windows**
 
@@ -120,30 +132,32 @@ Your local configuration should be stored at:
 streamlit run app.py
 ```
 
-Open the local URL provided by Streamlit, typically:
+Open the local URL provided by Streamlit, usually:
 
-[http://localhost:8501](http://localhost:8501)
+http://localhost:8501
 
-Upload a historical photograph to begin exploring.
+Upload a historical photograph and follow the instructions displayed in the application.
 
 ## Deployment
 
-EpochTrek can be deployed using [Streamlit Community Cloud](https://share.streamlit.io/).
+EpochTrek is hosted using [Streamlit Community Cloud](https://share.streamlit.io/).
 
-1. Sign in to Streamlit Community Cloud with GitHub.
-2. Create a new application from `breddyraghav/EpochTrek`.
-3. Select the `main` branch.
-4. Set the application entry point to `app.py`.
-5. Open **Advanced settings → Secrets**.
-6. Add your Gemini API key:
+To deploy your own instance:
 
-   ```toml
-   GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
-   ```
+1. Sign in to Streamlit Community Cloud using GitHub.
+2. Select the `breddyraghav/EpochTrek` repository.
+3. Choose the `main` branch.
+4. Set the main file path to `app.py`.
+5. Add the `GEMINI_API_KEY` value under **Advanced settings → Secrets**.
+6. Deploy the application.
 
-7. Deploy the application.
+Use TOML format for the secret:
 
-Keep the API key in Streamlit's Secrets settings rather than committing it to the repository.
+```toml
+GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
+```
+
+Never publish your real API key in source code, screenshots, or repository files.
 
 ## Project Structure
 
@@ -158,31 +172,55 @@ EpochTrek/
     └── secrets.toml.example
 ```
 
-The actual `secrets.toml` file is created locally and should remain untracked.
+The actual `secrets.toml` file is created locally or configured through the deployment platform and should not be committed.
 
-## Responsible Interpretation
+## Collaboration & Contributions
 
-EpochTrek is an exploratory tool, not a historical verification system.
+Contributions, suggestions, and ideas are welcome.
 
-- Location estimates generated by AI may be inaccurate.
-- Wikimedia Commons may return an image from a different year or viewpoint.
-- A comparison image should not automatically be assumed to depict the present day.
-- AI-generated change summaries may miss details or misinterpret visual evidence.
+EpochTrek can benefit from improvements in AI, image retrieval, historical research, interface design, testing, and documentation.
 
-For reliable historical conclusions, verify locations, dates, and image sources independently.
+### Areas for Collaboration
+
+- Improving location estimation and image matching
+- Enhancing visual comparison and change summaries
+- Refining the user interface and accessibility
+- Improving performance, error handling, and reliability
+- Expanding testing and documentation
+
+### How to Contribute
+
+1. Fork the repository.
+2. Create a branch for your changes.
+3. Implement and test your improvements.
+4. Submit a pull request with a clear description of your contribution.
+
+For substantial changes, open an issue first to discuss the proposed solution.
+
+**Repository:** [breddyraghav/EpochTrek](https://github.com/breddyraghav/EpochTrek)
+
+## Limitations
+
+EpochTrek is an exploratory application, not a historical verification system.
+
+- AI-generated location estimates may be inaccurate.
+- A retrieved image may depict a different year, location, or viewpoint.
+- A comparison image is not necessarily a current photograph.
+- AI-generated summaries may overlook details or misinterpret visual differences.
+
+Always verify dates, locations, and image sources independently before drawing historical conclusions.
 
 ## Acknowledgements
 
-- [Google Gemini](https://ai.google.dev/) — AI-assisted image interpretation.
-- [Wikimedia Commons](https://commons.wikimedia.org/) — freely accessible media resources.
+- [Google Gemini](https://ai.google.dev/) — AI-assisted image analysis.
+- [Wikimedia Commons](https://commons.wikimedia.org/) — image search and media resources.
 - [Streamlit](https://streamlit.io/) — Python web application framework.
 
 ---
 
-<div align="center">
-
-**EpochTrek**
-
-*Connecting the past with the present through AI.*
-
-</div>
+<p align="center">
+  <strong>EpochTrek</strong><br>
+  <em>Connecting the past with the present through AI.</em><br><br>
+  <a href="https://epochtrek.streamlit.app/">Live Demo</a> ·
+  <a href="https://github.com/breddyraghav/EpochTrek">GitHub Repository</a>
+</p>
