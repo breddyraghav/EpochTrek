@@ -1,120 +1,140 @@
 # EpochTrek — Journey Through Time
 
-This guide is written for a Windows laptop using VS Code. Follow the steps in order.
+**Explore how places have changed over time using AI and historical photographs.**
 
-## A. Open the correct folder
+EpochTrek is a Python-based web application that analyzes historical photographs, estimates their locations using Google's Gemini AI, searches Wikimedia Commons for comparison images, and summarizes visible changes between the past and present.
 
-1. Download and extract `epochtrek-starter.zip`.
-2. In VS Code select **File → Open Folder**.
-3. Open the folder named **epochtrek** (the folder that contains `app.py` and `requirements.txt`).
-4. Select **Terminal → New Terminal**.
+## Features
 
-## B. Check Python
+- **Historical Photo Upload:** Upload a photograph of an old building, landmark, street, or other recognizable place.
+- **AI-Powered Location Identification:** Uses Google's Gemini model to estimate where the photograph was taken.
+- **Then & Now Comparison:** Searches Wikimedia Commons for a potential comparison image.
+- **Visual Change Analysis:** Generates an AI-assisted summary of visible differences between the two images.
+- **Interactive Web Interface:** Provides a simple interface built with Streamlit.
+- **Cloud Deployment:** Can be deployed using Streamlit Community Cloud.
 
-In the VS Code terminal, run:
+## How It Works
 
-```powershell
-py --version
+1. Upload a historical photograph.
+2. Gemini analyzes the image and estimates its likely location.
+3. EpochTrek searches Wikimedia Commons for a suitable comparison image.
+4. View the historical and comparison images side by side.
+5. Read the AI-assisted summary of visible changes.
+
+## Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| Python | Application logic |
+| Streamlit | Web interface |
+| Google Gemini API | Image interpretation and change summaries |
+| Wikimedia Commons API | Comparison image search |
+| Requests | HTTP requests and API communication |
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.10 or newer
+- Git
+- A Google Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey)
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/breddyraghav/EpochTrek.git
+cd EpochTrek
 ```
 
-You should see Python 3.10 or newer. If `py` is not recognized, install Python from https://www.python.org/downloads/ and tick **Add python.exe to PATH** during setup. Restart VS Code after installation.
+### 2. Create a Virtual Environment
 
-## C. Set up the project
-
-Run these commands one at a time in the VS Code terminal:
+**Windows (PowerShell):**
 
 ```powershell
 py -m venv .venv
-```
-
-```powershell
 .venv\Scripts\python.exe -m pip install --upgrade pip
-```
-
-```powershell
 .venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-These commands do not require activating the virtual environment. Wait for each command to finish before running the next.
+**macOS or Linux:**
 
-## D. Add your Gemini key
-
-1. In VS Code Explorer, open the `.streamlit` folder.
-2. Create a new file inside it named exactly `secrets.toml` (not `secrets.toml.txt`).
-3. Paste the following and replace the text inside quotes with your key from https://aistudio.google.com/apikey:
-
-```toml
-GEMINI_API_KEY = "PASTE_YOUR_REAL_KEY_HERE"
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
 ```
 
-4. Save the file. Never share the key or commit `secrets.toml` to GitHub. The `.gitignore` file excludes it.
+### 3. Configure the Gemini API Key
 
-## E. Run EpochTrek locally
+Create a file named `secrets.toml` inside the `.streamlit` folder.
 
-In the VS Code terminal, run:
+Your project should contain:
+
+```text
+.streamlit/
+├── config.toml
+├── secrets.toml.example
+└── secrets.toml
+```
+
+Add the following to `.streamlit/secrets.toml`:
+
+```toml
+GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
+```
+
+Replace the placeholder with your actual API key.
+
+**Security:** Never commit, publish, or share your real API key. Keep `secrets.toml` private and use Streamlit Secrets when deploying online.
+
+### 4. Run EpochTrek Locally
+
+**Windows:**
 
 ```powershell
 .venv\Scripts\python.exe -m streamlit run app.py
 ```
 
-Your browser should open. If it does not, open http://localhost:8501. Upload a clear old photo of a recognizable landmark, then click **Identify place & compare with today**. Keep the terminal open while using the app. To stop it, click the terminal and press `Ctrl+C`.
-
-## F. If something goes wrong
-
-- **`py` is not recognized**: install Python and restart VS Code.
-- **`No module named streamlit`**: run the install commands in section C again.
-- **Gemini API key not found**: confirm `.streamlit/secrets.toml` exists in this project and its line is `GEMINI_API_KEY = "..."`; then stop and restart Streamlit.
-- **Invalid API key / permission / quota error**: recheck the key in AI Studio and account/model limits. Do not post the key in a screenshot.
-- **No image found**: try a more recognizable landmark. Wikimedia Commons may not have a suitable matching image.
-- **PowerShell command confusion**: paste one command at a time into VS Code's terminal, not into a Python `>>>` prompt.
-
-If you get an error, copy the full red error text from the VS Code terminal and send it, but remove any API key first.
-
-## G. Push to GitHub (after local run works)
-
-1. Create an empty repository named `epochtrek` at https://github.com/new.
-2. In VS Code's terminal, make sure you are in the folder containing `app.py`.
-3. Run these commands one at a time, replacing `YOUR_USERNAME` with your GitHub username:
+**macOS or Linux:**
 
 ```bash
-git init
-git add .
-git status
+streamlit run app.py
 ```
 
-Check that `.streamlit/secrets.toml` is NOT listed. If it is listed, stop and do not commit.
+Open the local URL displayed in your terminal, usually:
 
-```bash
-git commit -m "Build EpochTrek historical photo comparison app"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/epochtrek.git
-git push -u origin main
-```
+http://localhost:8501
 
-If Git asks you to configure your name/email, follow the message it prints and then repeat the commit.
+Upload a historical photograph and follow the on-screen instructions.
 
-## H. Deploy with Streamlit Community Cloud
+## Deploy on Streamlit Community Cloud
 
-1. Open https://share.streamlit.io/ and sign in with GitHub.
-2. Choose **Create app**. Select your `epochtrek` repository, branch `main`, and file path `app.py`.
-3. Open **Advanced settings → Secrets** and paste the same TOML setting from section D, with your real key.
-4. Choose a supported Python version (3.11 or 3.12) if prompted, then deploy.
-5. Keep the local `secrets.toml` private; only enter the secret through Streamlit's Secrets interface.
+1. Open [Streamlit Community Cloud](https://share.streamlit.io/).
+2. Sign in with your GitHub account.
+3. Create a new app using the repository `breddyraghav/EpochTrek`.
+4. Select the `main` branch.
+5. Set the main file path to `app.py`.
+6. Open **Advanced settings → Secrets**.
+7. Add your Gemini API key:
 
-## Project files
+   ```toml
+   GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
+   ```
 
-```text
-epochtrek/
-├── app.py
-├── requirements.txt
-├── README.md
-├── .gitignore
-└── .streamlit/
-    ├── config.toml
-    ├── secrets.toml.example
-    └── secrets.toml       # create this yourself; do not upload it
-```
+8. Deploy the application.
 
-## Important note about results
+Keep your API key in Streamlit's Secrets settings rather than storing it in GitHub.
 
-The app uses AI to estimate the location and Wikimedia Commons to search for a comparison image. The second image may not be a recent photo or the exact same viewpoint. Always check its source and treat AI-generated differences as suggestions, not verified history.
+## Troubleshooting
+
+| Problem | Suggested solution |
+|---|---|
+| Python is not recognized | Install Python and restart your terminal. |
+| A package is missing | Run `pip install -r requirements.txt` in your virtual environment. |
+| Gemini API key error | Check the `GEMINI_API_KEY` setting in your local secrets file or Streamlit Cloud. |
+| API quota or permission error | Check your Google AI Studio project, API key, model access, and usage limits. |
+| No suitable comparison image | Try a clearer photograph of a recognizable landmark. |
+| Streamlit app does not start | Check the terminal for the full error message and verify the project dependencies. |
+
+Remove any
